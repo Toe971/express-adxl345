@@ -32,7 +32,7 @@ const sequelize = new Sequelize(
 // wrapped in sequelize because can use it for authentication, test next time
 // can use Extending Model next time under sequelize docs
 sequelize
-    .authenticate() // is necessary, even though we never provide
+    .authenticate() // is necessary, even though we never provide username or password, will fail otherwise
     .then(() => {
         console.log("Connection established.")
         // define new table: Acceleration
@@ -104,8 +104,19 @@ accelRouter.get('/', async (req, res, next) => {
 accelRouter.post('/', async (req, res, next) => {
     // expects shape of POST request to be the same as the GET
     // i.e. see testValues above
+    let reqBodyKeys = Object.keys(req.body)
+    let keysArray = Object.keys(testValues)
+    let filterKeys = new Set(keysArray)
+    let result = reqBodyKeys.every(key => {
+        return filterKeys.has(key)
+    })
+    if (result) {
+        
+        res.status(201).send()
+    } 
+
 })
 
 const listener = app.listen(8080, function() {
     console.log("Listening on port " + listener.address().port);
-  });
+});
