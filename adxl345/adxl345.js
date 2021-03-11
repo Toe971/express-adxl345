@@ -20,11 +20,11 @@ board.on("ready", () => {
             /* accelerometer.on("change", () => { return 1 }) ? true : false // if 1 true else null false, dont know how type coercing works in sqlite3 yet */
         } 
         console.log(objToSend)
-        axios({
+        /* axios({
             method: 'post',
             url: '/accelerometer',
             data: objToSend
-        })
+        }) */
         
     })
 })
