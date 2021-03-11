@@ -1,5 +1,12 @@
 version: "3"
 services:
     db:
+        # try without using Dockerfile pull image from sqlite3, it's also not an official image
         container_name: sqlite3-server-db
         image: nouchka/sqlite3:latest 
+        volumes:
+            - db-data:/var/lib/sqlite3/data
+
+# volumes need to be same indentation as services, we put the following at the bottom as part of the required syntax        
+volumes:
+    db-data:
