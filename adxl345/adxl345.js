@@ -1,6 +1,6 @@
 const axios = require('axios')
-const { Accelerometer, Board } = require('johnny-five')
 const Raspi = require('raspi-io').RaspiIO
+const { Accelerometer, Board } = require('johnny-five')
 const board = new Board({
     io: new Raspi()
 });
