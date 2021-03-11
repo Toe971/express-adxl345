@@ -5,7 +5,7 @@ services:
         container_name: sqlite3-server-db
         image: nouchka/sqlite3:latest 
         volumes:
-            - db-data:/var/lib/sqlite3/data
+            - db-data:/etc/sqlite3/db.sqlite #double check whether is put file directory or is .sqlite
 
 # volumes need to be same indentation as services, we put the following at the bottom as part of the required syntax        
 volumes:
