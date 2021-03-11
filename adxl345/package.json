@@ -12,5 +12,8 @@
   "dependencies": {
     "axios": "^0.21.1",
     "johnny-five": "^2.0.0"
+  },
+  "optionalDependencies": {
+    "raspi-io": "^11.0.0"
   }
 }
