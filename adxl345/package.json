@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "amqplib": "^0.7.1",
     "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
     "johnny-five": "^2.0.0"
   },
   "optionalDependencies": {

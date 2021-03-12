@@ -1,4 +1,4 @@
-const sqlite3 = require('sqlite3').verbose(); // not needed since use Sequelize?
+const dotenv = require('dotenv').config()
 const fs = require('fs');
 const { Sequelize, Model, DataTypes } = require('sequelize');
 // look into changing location to be within current directory of app? currently location is also used in docker-compose
@@ -23,6 +23,9 @@ makeDirectory();
 
 // can include 'database', 'username', 'password' from dotenv config?
 const sequelize = new Sequelize(
+    "database",
+    process.env.USER,
+    process.env.PASSWORD,
     {
         dialect: 'sqlite',
         storage: location
@@ -46,9 +49,6 @@ sequelize
             },
             zAxis: {
                 type: DataTypes.FLOAT
-            },
-            motionBool: {
-                type: DataTypes.BOOLEAN
             }
         }, {
             timestamps: true // compare it tot timestampAsId, as for createdAt and updatedAt may need to set to faLse
@@ -60,8 +60,6 @@ sequelize
             xAxis: 3.3333,
             yAxis: 4.4444,
             zAxis: 5.5555,
-            motionBool: true,
-            timestampAsId: new Date()
         }
 
         const testWrite = async () => {
@@ -104,16 +102,17 @@ accelRouter.get('/', async (req, res, next) => {
 accelRouter.post('/', async (req, res, next) => {
     // expects shape of POST request to be the same as the GET
     // i.e. see testValues above
-    let reqBodyKeys = Object.keys(req.body)
+/*     let reqBodyKeys = Object.keys(req.body)
     let keysArray = Object.keys(testValues)
     let filterKeys = new Set(keysArray)
     let result = reqBodyKeys.every(key => {
         return filterKeys.has(key)
-    })
+    }) */
     if (result) {
-        
         res.status(201).send()
-    } 
+    } else {
+        res.status(400).send()
+    }
 
 })
 

@@ -1,21 +1,26 @@
-const http = require('http')
-const options = {
-  hostname: 'localhost',
-  port: 8080,
-  path: '/accelerometer',
-  method: 'GET'
-}
+const axios = require('axios')
 
-const req = http.request(options, res => {
-  console.log(`statusCode: ${res.statusCode}`)
+const objToSend = {
+  xAxis: 2.222,
+  yAxis: 3.333,
+  zAxis: 4.444,
+  motionBool: false,
+  /* accelerometer.on("change", () => { return 1 }) ? true : false // if 1 true else null false, dont know how type coercing works in sqlite3 yet */
+} 
 
-  res.on('data', d => {
-    process.stdout.write(d)
+axios
+  .get('http://localhost:8080/accelerometer')
+  .then(res => {
+    console.log(res.status, res.data)
   })
-})
 
-req.on('error', error => {
-  console.error(error)
-})
 
-req.end()
+/* axios({
+  method: 'post',
+  url: '192.168.1.55:8000/accelerometer',
+  data: objToSend
+}).then(res => {
+  console.log(res.status, res.data)
+}).catch(err => {
+  console.log(err)
+}) */
